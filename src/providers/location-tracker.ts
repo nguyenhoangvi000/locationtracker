@@ -63,17 +63,6 @@ export class LocationTracker {
     this.geolocationQuery = this.af.database.list('/geolocationCurrents/' + this.uid, { preserveSnapshot: true });
 
 
-    // let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-    //   let toast = this.toastController.create({
-    //     message: "Không có kết nối mạng",
-    //     duration: 10000,
-    //     position: "bottom"
-    //   });
-    //   toast.present();
-    // });
-
-
-
     let config = {
       desiredAccuracy: 0,
       stationaryRadius: 20,
@@ -83,9 +72,6 @@ export class LocationTracker {
       fastestLocationUpdateInterval: 20000,
     }
 
-    // this.backgroundGeolocation.configure(config).subscribe((location) => {
-
-    // })
 
 
     let connectSubcription = this.network.onConnect().subscribe(() => {
@@ -153,15 +139,6 @@ export class LocationTracker {
               })
 
               this.windowProvider.window.localStorage.removeItem('geolocation');
-              // this.storage.forEach(item => {
-              //   this.geolocationCurrents.push({
-              //     lat: item.lat,
-              //     lng: item.lng
-              //   })
-              // })
-
-              // this.storage.clear();
-
               this.geolocationCurrents.push({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,

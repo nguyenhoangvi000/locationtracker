@@ -37,7 +37,6 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    // IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
