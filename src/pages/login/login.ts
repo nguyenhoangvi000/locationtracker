@@ -26,7 +26,9 @@ export class LoginPage {
   password: any;
   uid: string;
 
-  constructor(public navCtrl: NavController, private locationTracker: LocationTracker, public navParams: NavParams, public angfire: AngularFire, public toastController: ToastController) { }
+  constructor(public navCtrl: NavController, private locationTracker: LocationTracker, public navParams: NavParams, public angfire: AngularFire, public toastController: ToastController) { 
+    window.localStorage.clear();
+  }
 
   login() {
     this.angfire.auth.login({
@@ -49,7 +51,11 @@ export class LoginPage {
           uid: response.auth.uid
         };
 
-        window.localStorage.setItem('currentuser',this.uid);
+        this.uid = currentUser.uid;
+        window.localStorage.setItem('currentuser', this.uid);
+        console.log(this.uid);
+
+        this.navCtrl.pop();
 
       }).catch((error) => {
         // console.log(error);

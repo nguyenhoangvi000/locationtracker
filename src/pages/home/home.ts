@@ -25,7 +25,8 @@ export class HomePage {
   };
 
   isLoggedin() {
-    if (window.localStorage.getItem('currentuser')) {
+    this.uid = window.localStorage.getItem('currentuser')
+    if (this.uid != null) {
       console.log(window.localStorage.getItem('currentuser'));
       return true;
     }
@@ -34,7 +35,9 @@ export class HomePage {
   start() {
     console.log('ok');
     // console.log(window.localStorage.getItem('currentUser'));
-    this.locationTracker.uid = JSON.parse(window.localStorage.getItem('currentuser').toString()).uid;
+    console.log(this.uid);
+    this.locationTracker.uid = this.uid;
+    // this.locationTracker.uid = JSON.parse(window.localStorage.getItem('currentuser').toString()).uid;
     this.locationTracker.startTracking();
   }
 
