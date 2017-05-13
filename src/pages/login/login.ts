@@ -26,51 +26,65 @@ export class LoginPage {
   password: any;
   uid: string;
 
-  constructor(public navCtrl: NavController, private locationTracker: LocationTracker, public navParams: NavParams, public angfire: AngularFire, public toastController: ToastController) { 
+  constructor(public navCtrl: NavController, private locationTracker: LocationTracker, public navParams: NavParams, public angfire: AngularFire, public toastController: ToastController) {
     window.localStorage.clear();
   }
 
   login() {
-    this.angfire.auth.login({
-      email: this.email,
-      password: this.password
-    }, {
-        provider: AuthProviders.Password,
-        method: AuthMethods.Password
-      }).then((response) => {
-        // console.log('Login Success' + JSON.stringify(response));
-        let toast = this.toastController.create({
-          message: 'Login Success',
-          duration: 2000,
-          position: "bottom"
-        });
-        toast.present();
-        let currentUser = {
-          email: response.auth.email,
-          picture: response.auth.photoURL,
-          uid: response.auth.uid
-        };
+    try {
+      this.email = this.email.replace(/ /g, '');
+      this.password = this.password.replace(/ /g, '');
+      if (this.email != null && this.password != null) {
+        this.angfire.auth.login({
+          email: this.email,
+          password: this.password
+        }, {
+            provider: AuthProviders.Password,
+            method: AuthMethods.Password
+          }).then((response) => {
+            // console.log('Login Success' + JSON.stringify(response));
+            let toast = this.toastController.create({
+              message: 'Login Success',
+              duration: 2000,
+              position: "bottom"
+            });
+            toast.present();
+            let currentUser = {
+              email: response.auth.email,
+              picture: response.auth.photoURL,
+              uid: response.auth.uid
+            };
+            window.localStorage.clear();
+            while (currentUser.uid == null) {
+              setInterval(100);
+            }
+            this.locationTracker.uid = currentUser.uid;
+            // console.log(this.uid);
+            // window.localStorage.setItem('currentuser', this.uid);
 
-        this.uid = currentUser.uid;
-        window.localStorage.setItem('currentuser', this.uid);
-        console.log(this.uid);
+            this.navCtrl.pop();
 
-        this.navCtrl.pop();
+          }).catch((error) => {
+            // console.log(error);
+            let toast = this.toastController.create({
+              message: error.toString(),
+              duration: 10000,
+              position: "bottom"
+            });
+            toast.present();
+          })
+      }
+    } catch (error) {
 
-      }).catch((error) => {
-        // console.log(error);
-        let toast = this.toastController.create({
-          message: error.toString(),
-          duration: 10000,
-          position: "bottom"
-        });
-        toast.present();
-      })
+      console.log(error);
+
+    }
+
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
 
 }

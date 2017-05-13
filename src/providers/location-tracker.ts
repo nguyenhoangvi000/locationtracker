@@ -31,6 +31,9 @@ export class LocationTracker {
 
   public uid: string;
 
+
+
+
   // private currentUser: any = JSON.parse(this.windowProvider.window.localStorage.getItem('currentuser'));
 
   // Get User through sql storage
@@ -42,8 +45,6 @@ export class LocationTracker {
   currentGeolocation = [];
 
   constructor(public zone: NgZone, private backgroundGeolocation: BackgroundGeolocation, private geolocation: Geolocation, private af: AngularFire, private windowProvider: WindowProvider, private network: Network, private toastController: ToastController) {
-
-
   }
 
 
@@ -53,14 +54,16 @@ export class LocationTracker {
     this.watch.unsubscribe();
   }
 
-  startTracking() {
+
+
+  startTracking(uid: string) {
     console.log('Vao trong roi ne');
 
-    
-    console.log(this.uid);
 
-    this.geolocationCurrents = this.af.database.list('/geolocationCurrents/' + this.uid, { preserveSnapshot: true });
-    this.geolocationQuery = this.af.database.list('/geolocationCurrents/' + this.uid, { preserveSnapshot: true });
+    // console.log(this.uid);
+
+    this.geolocationCurrents = this.af.database.list('/geolocationCurrents/' + uid, { preserveSnapshot: true });
+    this.geolocationQuery = this.af.database.list('/geolocationCurrents/' + uid, { preserveSnapshot: true });
 
 
     let config = {

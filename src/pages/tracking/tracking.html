@@ -1,0 +1,40 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Firebase
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col width-20>
+
+    </ion-col>
+    <ion-col width-60>
+      <h3>Vĩ độ hiện tại: </h3>
+      <h3>{{locationTracker.lat}}</h3>
+      <h3>Kinh độ hiện tại: </h3>
+      <h3>{{locationTracker.lng}}</h3>
+    </ion-col>
+    <ion-col width-20>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col width-20>
+
+    </ion-col>
+    <ion-col width-60>
+      <button ion-button full primary (click)="start()">Bắt đầu</button>
+      <button ion-button full primary (click)="stop()">Dừng</button>
+      <button ion-button full primary (click)="signout()">Đăng xuất</button>
+    </ion-col>
+    <ion-col width-20>
+
+    </ion-col>
+  </ion-row>
+</ion-content>

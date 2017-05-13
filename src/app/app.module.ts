@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login'
+import { TrackingPage } from '../pages/tracking/tracking';
 
 import { AngularFireModule } from 'angularfire2';
 
@@ -31,10 +32,13 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    TrackingPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true,
+    }),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
   ],
@@ -42,7 +46,8 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    TrackingPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, BackgroundGeolocation, Geolocation, LocationTracker, WindowProvider, Network]
 })
