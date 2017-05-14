@@ -12,6 +12,7 @@ import { TrackingPage } from '../tracking/tracking';
   templateUrl: 'chat.html'
 })
 export class ChatPage {
+    
   constructor() {
 
   };

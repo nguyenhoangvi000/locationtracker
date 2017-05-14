@@ -3,7 +3,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login'
+import { LoginPage } from '../pages/login/login';
+import { ChatPage } from '../pages/chat/chat';
 import { TrackingPage } from '../pages/tracking/tracking';
 
 import { AngularFireModule } from 'angularfire2';
@@ -33,6 +34,7 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage,
+    ChatPage,
     TrackingPage
   ],
   imports: [
@@ -47,6 +49,7 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage,
+    ChatPage,
     TrackingPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, BackgroundGeolocation, Geolocation, LocationTracker, WindowProvider, Network]
