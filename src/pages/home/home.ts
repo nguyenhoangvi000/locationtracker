@@ -21,6 +21,5 @@ export class HomePage {
   constructor() {
     this.tab1 = TrackingPage;
     this.tab2 = ChatPage;
-
   };
 }

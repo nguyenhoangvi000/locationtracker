@@ -45,8 +45,8 @@ export class LoginPage {
             // console.log('Login Success' + JSON.stringify(response));
             let toast = this.toastController.create({
               message: 'Login Success',
-              duration: 2000,
-              position: "bottom"
+              duration: 1500,
+              position: 'top'
             });
             toast.present();
             let currentUser = {

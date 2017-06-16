@@ -1,3 +1,51 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <ion-icon name="chatbubbles"></ion-icon>&nbsp;&nbsp;Tin nhắn hệ thống
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
 <ion-content>
-    
+    <ion-list>
+        <div *ngFor="let data of messages">
+            <ion-item *ngIf="username === data.username" style="border-right: solid 5px red;">
+                <p class="chat-text" item-left>
+                    <strong>{{data.username}}: </strong> {{data.message}}
+                </p>
+                <p class="chat-time" item-right>
+                    {{data.date | date:'dd/MM/yyyy'}}
+                </p>
+            </ion-item>
+            <ion-item *ngIf="username !== data.username" style="border-right: solid 5px green;">
+                <p class="chat-text" item-left>
+                    <strong>{{data.username}}: </strong> {{data.message}}
+                </p>
+                <p class="chat-time" item-right>
+                    {{data.date | date:'dd/MM/yyyy'}}
+                </p>
+            </ion-item>
+        </div>
+    </ion-list>
 </ion-content>
+<ion-footer>
+    <form #f="ngForm">
+        <ion-grid>
+            <ion-row style="border: 1px solid #CCCCCC;border-radius: 5pxs">
+                <ion-col width-20 center>
+                    <button (click)="upload()" ion-button icon-only>
+                        <ion-icon name="add"></ion-icon>
+                    </button>
+                </ion-col>
+                <ion-col width-70>
+                    <ion-input type="text" name="chatText" [(ngModel)]="messageContent" placeholder="type here..."></ion-input>
+                </ion-col>
+                <ion-col width-20 center>
+                    <button (click)="send()" ion-button icon-only>
+                        <ion-icon name="send"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-footer>
