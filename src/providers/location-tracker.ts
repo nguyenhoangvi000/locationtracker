@@ -8,16 +8,9 @@ import { ToastController } from 'ionic-angular';
 import 'rxjs/add/operator/filter';
 
 
-// -----Native
-// import { Storage } from '@ionic/storage';
-// import { IonicStorageModule } from '@ionic/storage';
-// import { NativeStorage } from '@ionic-native/native-storage';
-import { Network } from '@ionic-native/network';
-// -----Native
 
-// -------Service
+import { Network } from '@ionic-native/network';
 import { WindowProvider } from './window-provider';
-// -------Service
 
 
 @Injectable()
@@ -60,10 +53,11 @@ export class LocationTracker {
     console.log('Vao trong roi ne');
 
 
-    // console.log(this.uid);
+    // // console.log(this.uid);
 
     this.geolocationCurrents = this.af.database.list('/geolocationCurrents/' + uid, { preserveSnapshot: true });
     this.geolocationQuery = this.af.database.list('/geolocationCurrents/' + uid, { preserveSnapshot: true });
+
 
 
     let config = {
@@ -193,6 +187,15 @@ export class LocationTracker {
     connectSubcription.unsubscribe();
 
   }
+}
+
+function createFirebaseList(uid: String) {
+
+  this.geolocationCurrents = this.af.database.list('/geolocationCurrents/' + uid + "/" + new Date(), { preserveSnapshot: true });
+  this.geolocationQuery = this.af.database.list('/geolocationCurrents/' + uid + new Date(), { preserveSnapshot: true });
+
+
+
 }
 
 function formatDate(date) {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
 import { ToastController } from 'ionic-angular';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import { WindowProvider } from '../../providers/window-provider';
 import { LocationTracker } from '../../providers/location-tracker';
@@ -26,8 +27,9 @@ export class LoginPage {
   password: any;
   uid: string;
 
-  constructor(public navCtrl: NavController, private locationTracker: LocationTracker, public navParams: NavParams, public angfire: AngularFire, public toastController: ToastController) {
+  constructor(public localStorage: LocalStorageService, public navCtrl: NavController, private locationTracker: LocationTracker, public navParams: NavParams, public angfire: AngularFire, public toastController: ToastController) {
     window.localStorage.clear();
+    this.localStorage.clearAll();
   }
 
   login() {
@@ -52,9 +54,12 @@ export class LoginPage {
             let currentUser = {
               email: response.auth.email,
               picture: response.auth.photoURL,
-              uid: response.auth.uid
+              uid: response.auth.uid,
+              displayName: response.auth.displayName
             };
-            window.localStorage.clear();
+            // window.localStorage.clear();
+            localStorage.setItem("uid", currentUser.uid);
+            console.log(localStorage.getItem("uid"));
             while (currentUser.uid == null) {
               setInterval(100);
             }
@@ -79,8 +84,8 @@ export class LoginPage {
       console.log(error);
 
     }
-
-
+    // localStorage.setItem("uid", "tdu94pNqT9PggFqdam7TApjbUD13");
+    // this.navCtrl.pop();
   }
 
   ionViewDidLoad() {

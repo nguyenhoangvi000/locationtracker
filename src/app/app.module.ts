@@ -6,6 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ChatPage } from '../pages/chat/chat';
 import { TrackingPage } from '../pages/tracking/tracking';
+import { UserlistPage } from '../pages/userlist/userlist';
 
 import { AngularFireModule } from 'angularfire2';
 
@@ -15,10 +16,13 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { WindowProvider } from '../providers/window-provider';
 import { IonicStorageModule } from '@ionic/storage';
+import { LocalStorageModule } from 'angular-2-local-storage';
 // Provider
 
 // import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
+import { Dialogs } from '@ionic-native/dialogs';
+import { AlertController } from 'ionic-angular';
 // import { Storage } from '@ionic/storage';
 
 export const firebaseConfig = {
@@ -35,7 +39,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     ChatPage,
-    TrackingPage
+    TrackingPage,
+    UserlistPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -43,6 +48,10 @@ export const firebaseConfig = {
     }),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
+    LocalStorageModule.withConfig({
+      prefix: 'location-tracking',
+      storageType: 'sessionStorage'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +59,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     ChatPage,
-    TrackingPage
+    TrackingPage,
+    UserlistPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, BackgroundGeolocation, Geolocation, LocationTracker, WindowProvider, Network]
 })

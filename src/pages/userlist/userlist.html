@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Danh sách liên hệ</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-list-header>
+            Danh sách liên hệ
+        </ion-list-header>
+        <a *ngFor="let driver of drivers|async">
+            <ion-item *ngIf="driver.$key!=currentUid" (click)="showDetailPage(driver)">
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-avatar item-start>
+                            <img src="https://lh6.googleusercontent.com/25qaFB1SXi50OgrazksvBds8or5UGimjC3tzlmTzrK4D27liR4wRWst5P6MAKT8yWQBq6h1lxp239G8=w1366-h649">
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col col-6>
+                        <h2>{{driver.name}}</h2>
+                        <h3>Tài xế</h3>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-badge color="secondary"><p></p></ion-badge>
+                        <br/>
+                        <ion-note item-end>1:12 pm</ion-note>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </a>
+    </ion-list>
+</ion-content>
